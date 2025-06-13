@@ -45,7 +45,7 @@ public class DaprProducer extends DefaultProducer {
     private void setResponse(Exchange exchange, DaprOperationResponse response) {
         if (response != null) {
             exchange.getMessage().setBody(response.getBody());
-            exchange.getMessage().setHeaders(response.getHeaders());
+            exchange.getMessage().getHeaders().putAll(response.getHeaders());
         }
     }
 

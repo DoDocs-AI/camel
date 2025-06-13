@@ -2071,6 +2071,11 @@
             <artifactId>camel-zookeeper-master</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>dodocs-camel-dapr</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
