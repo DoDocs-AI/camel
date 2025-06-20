@@ -18,6 +18,7 @@ package org.apache.camel.component.dapr;
 
 import java.util.List;
 
+import io.dapr.client.DaprClient;
 import io.dapr.client.DaprPreviewClient;
 import io.dapr.client.domain.HttpExtension;
 import io.dapr.client.domain.StateOptions.Concurrency;
@@ -71,6 +72,11 @@ public class DaprConfiguration implements Cloneable {
     @UriParam(label = "consumer", description = "The client to consume messages by the consumer")
     @Metadata(autowired = true)
     private DaprPreviewClient previewClient;
+
+    @UriParam(label = "producer", description = "The client to consume messages by the consumer")
+    @Metadata(autowired = true)
+    private DaprClient daprClient;
+
     @UriParam(label = "common", description = "The name of the Dapr Pub/Sub component to use. This identifies which underlying "
                                               + "messaging system Dapr will interact with for publishing or subscribing to events.")
     private String pubSubName;
@@ -85,6 +91,7 @@ public class DaprConfiguration implements Cloneable {
     private String bindingOperation;
     @UriParam(label = "common", description = "List of keys for configuration operation")
     private List<String> configKeys;
+
 
     /**
      * The Dapr <b>building block operation</b> to perform with this component
@@ -351,5 +358,13 @@ public class DaprConfiguration implements Cloneable {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeCamelException(e);
         }
+    }
+
+    public DaprClient getDaprClient() {
+        return daprClient;
+    }
+
+    public void setDaprClient(DaprClient daprClient) {
+        this.daprClient = daprClient;
     }
 }

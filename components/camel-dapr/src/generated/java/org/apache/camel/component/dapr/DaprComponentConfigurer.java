@@ -47,6 +47,8 @@ public class DaprComponentConfigurer extends PropertyConfigurerSupport implement
         case "consistency": getOrCreateConfiguration(target).setConsistency(property(camelContext, io.dapr.client.domain.StateOptions.Consistency.class, value)); return true;
         case "contenttype":
         case "contentType": getOrCreateConfiguration(target).setContentType(property(camelContext, java.lang.String.class, value)); return true;
+        case "daprclient":
+        case "daprClient": getOrCreateConfiguration(target).setDaprClient(property(camelContext, io.dapr.client.DaprClient.class, value)); return true;
         case "etag":
         case "eTag": getOrCreateConfiguration(target).setETag(property(camelContext, java.lang.String.class, value)); return true;
         case "httpextension":
@@ -76,7 +78,7 @@ public class DaprComponentConfigurer extends PropertyConfigurerSupport implement
 
     @Override
     public String[] getAutowiredNames() {
-        return new String[]{"httpExtension", "previewClient"};
+        return new String[]{"daprClient", "httpExtension", "previewClient"};
     }
 
     @Override
@@ -99,6 +101,8 @@ public class DaprComponentConfigurer extends PropertyConfigurerSupport implement
         case "consistency": return io.dapr.client.domain.StateOptions.Consistency.class;
         case "contenttype":
         case "contentType": return java.lang.String.class;
+        case "daprclient":
+        case "daprClient": return io.dapr.client.DaprClient.class;
         case "etag":
         case "eTag": return java.lang.String.class;
         case "httpextension":
@@ -147,6 +151,8 @@ public class DaprComponentConfigurer extends PropertyConfigurerSupport implement
         case "consistency": return getOrCreateConfiguration(target).getConsistency();
         case "contenttype":
         case "contentType": return getOrCreateConfiguration(target).getContentType();
+        case "daprclient":
+        case "daprClient": return getOrCreateConfiguration(target).getDaprClient();
         case "etag":
         case "eTag": return getOrCreateConfiguration(target).getETag();
         case "httpextension":

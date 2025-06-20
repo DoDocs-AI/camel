@@ -18,6 +18,7 @@ package org.apache.camel.component.dapr;
 
 import io.dapr.client.DaprClient;
 import io.dapr.client.DaprClientBuilder;
+import io.dapr.config.Property;
 import org.apache.camel.Category;
 import org.apache.camel.Consumer;
 import org.apache.camel.Processor;
@@ -27,7 +28,7 @@ import org.apache.camel.component.dapr.consumer.DaprPubSubConsumer;
 import org.apache.camel.spi.UriEndpoint;
 import org.apache.camel.spi.UriParam;
 import org.apache.camel.support.DefaultEndpoint;
-
+import io.dapr.config.Properties;
 /**
  * Dapr component which interfaces with Dapr Building Blocks.
  */
@@ -67,7 +68,15 @@ public class DaprEndpoint extends DefaultEndpoint {
     @Override
     public void doStart() throws Exception {
         super.doStart();
-        client = new DaprClientBuilder().build();
+        io.dapr.config.Property<Integer> grpcPort = Properties.GRPC_PORT;
+
+        if (configuration.getDaprClient() != null) {
+            client = configuration.getDaprClient();
+        } else {
+            client = new DaprClientBuilder()
+                    .build();
+        }
+
     }
 
     /**

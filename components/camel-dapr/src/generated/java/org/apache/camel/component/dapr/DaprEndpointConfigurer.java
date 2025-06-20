@@ -37,6 +37,8 @@ public class DaprEndpointConfigurer extends PropertyConfigurerSupport implements
         case "consistency": target.getConfiguration().setConsistency(property(camelContext, io.dapr.client.domain.StateOptions.Consistency.class, value)); return true;
         case "contenttype":
         case "contentType": target.getConfiguration().setContentType(property(camelContext, java.lang.String.class, value)); return true;
+        case "daprclient":
+        case "daprClient": target.getConfiguration().setDaprClient(property(camelContext, io.dapr.client.DaprClient.class, value)); return true;
         case "etag":
         case "eTag": target.getConfiguration().setETag(property(camelContext, java.lang.String.class, value)); return true;
         case "exceptionhandler":
@@ -70,7 +72,7 @@ public class DaprEndpointConfigurer extends PropertyConfigurerSupport implements
 
     @Override
     public String[] getAutowiredNames() {
-        return new String[]{"httpExtension", "previewClient"};
+        return new String[]{"daprClient", "httpExtension", "previewClient"};
     }
 
     @Override
@@ -90,6 +92,8 @@ public class DaprEndpointConfigurer extends PropertyConfigurerSupport implements
         case "consistency": return io.dapr.client.domain.StateOptions.Consistency.class;
         case "contenttype":
         case "contentType": return java.lang.String.class;
+        case "daprclient":
+        case "daprClient": return io.dapr.client.DaprClient.class;
         case "etag":
         case "eTag": return java.lang.String.class;
         case "exceptionhandler":
@@ -139,6 +143,8 @@ public class DaprEndpointConfigurer extends PropertyConfigurerSupport implements
         case "consistency": return target.getConfiguration().getConsistency();
         case "contenttype":
         case "contentType": return target.getConfiguration().getContentType();
+        case "daprclient":
+        case "daprClient": return target.getConfiguration().getDaprClient();
         case "etag":
         case "eTag": return target.getConfiguration().getETag();
         case "exceptionhandler":
